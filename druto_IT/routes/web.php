@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminPanel\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
+    Route::get('company',[CompanyController::class,'index'])->name('company');
+    Route::get('add_company',[CompanyController::class,'add'])->name('add_company');
+    Route::post('company_store',[CompanyController::class,'store'])->name('company_store');
+    Route::get('edit_company/{id}',[CompanyController::class,'edit'])->name('edit_company');
+    Route::post('company_update',[CompanyController::class,'update'])->name('company_update');
+
+});
