@@ -14,9 +14,9 @@ use App\Http\Controllers\AdminPanel\CompanyController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
@@ -30,3 +30,5 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
     Route::post('company_update',[CompanyController::class,'update'])->name('company_update');
 
 });
+
+Route::get('/',[\App\Http\Controllers\FrontEnd\HomeController::class,'index']);
